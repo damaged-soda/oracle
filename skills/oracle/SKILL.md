@@ -5,6 +5,21 @@ description: "Oracle second-model review: bundle prompts/files, debug, refactor,
 
 # Oracle (CLI) — best use
 
+## Managed installation
+
+Use the installed `oracle` command. This fork's installation pins the CLI release;
+do not fetch a different version with npx during a task. If the command is missing
+or an upgrade is requested, read [installation and provenance](../../docs/charter-install.md).
+The Charter manifest owns discovery; never install a second copy in a global
+client skill directory or edit generated skill links.
+
+Default to `--engine browser` with the persistent `--browser-manual-login` profile.
+On first use, let the user sign in in that browser; do not copy cookies from their
+daily browser. Preserve explicitly requested models and report unavailable models
+instead of silently substituting another. The model examples below are aliases,
+not a promise that the account currently exposes them.
+
+
 Oracle bundles a prompt and selected files into a one-shot request so another
 model can answer with real repository context through the API or browser. A
 prompt is required; attach files only when they add necessary context. Treat
@@ -72,22 +87,6 @@ recognizes the current English and Chinese effort labels, avoids matching
 `高` inside `极高`, and re-queries the composer pill after React replaces it so
 selection verification cannot rely on a detached stale node.
 
-## Compatibility with npm 0.15.2
-
-Do not pass `gpt-5.6` or `gpt-5.6-sol` to an unpatched npm 0.15.2 install. That
-release can normalize those labels to `gpt-5.2`. Use the explicit fallback:
-
-```bash
-npx -y @steipete/oracle@0.15.2 --engine browser --model gpt-5.5-pro \
-  -p "<task>" --file "src/**"
-```
-
-After upgrading to a release containing the GPT-5.6 model-selection and
-unified-picker changes, verify all of the following before removing the
-fallback guidance: `--help --verbose` exposes the new options, browser dry-run
-resolves both aliases to GPT-5.6 Sol, API routing selects first-party OpenAI,
-and a live browser run records strict GPT-5.6 selection evidence.
-
 ## Golden path
 
 1. Pick the smallest file set that still contains the truth.
@@ -99,24 +98,24 @@ and a live browser run records strict GPT-5.6 selection evidence.
 ## Commands
 
 - Show help:
-  - `npx -y @steipete/oracle --help --verbose`
+  - `oracle --help --verbose`
 
 - Preview without calling a model:
-  - `npx -y @steipete/oracle --dry-run summary -p "<task>" --file "src/**" --file "!**/*.test.*"`
-  - `npx -y @steipete/oracle --dry-run full -p "<task>" --file "src/**"`
+  - `oracle --dry-run summary -p "<task>" --file "src/**" --file "!**/*.test.*"`
+  - `oracle --dry-run full -p "<task>" --file "src/**"`
 
 - Inspect token usage:
-  - `npx -y @steipete/oracle --dry-run summary --files-report -p "<task>" --file "src/**"`
+  - `oracle --dry-run summary --files-report -p "<task>" --file "src/**"`
 
 - Browser run:
   - `oracle --engine browser --browser-manual-login --model gpt-5.6-sol --browser-thinking-time extra-high -p "<task>" --file "src/**"`
 
 - Manual paste fallback:
-  - `npx -y @steipete/oracle --render-markdown --copy-markdown -p "<task>" --file "src/**"`
+  - `oracle --render-markdown --copy-markdown -p "<task>" --file "src/**"`
   - `--render` is an alias for `--render-markdown`.
 
 - Performance trace:
-  - `npx -y @steipete/oracle --perf-trace --perf-trace-path /tmp/oracle-perf.json --dry-run summary -p "<task>" --file "src/**"`
+  - `oracle --perf-trace --perf-trace-path /tmp/oracle-perf.json --dry-run summary -p "<task>" --file "src/**"`
 
 ## Attaching files
 
