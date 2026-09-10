@@ -12,6 +12,8 @@ do not fetch a different version with npx during a task. If the command is missi
 or an upgrade is requested, read [installation and provenance](../../docs/charter-install.md).
 The Charter manifest owns discovery; never install a second copy in a global
 client skill directory or edit generated skill links.
+The base manifest grants this skill to all domains; `~/.local/bin/oracle` is the
+shared managed entry point. Browser runs reuse this machine's Oracle login profile.
 
 Default to `--engine browser` with the persistent `--browser-manual-login` profile.
 On first use, let the user sign in in that browser; do not copy cookies from their

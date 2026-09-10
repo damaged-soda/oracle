@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Personal fork: manage the Oracle skill through Charter and use the pinned local CLI instead of on-demand npx downloads.
+- Personal fork: manage the Oracle skill through Charter across all domains, with a shared pinned CLI launcher instead of on-demand npx downloads.
 
 ## 0.20.0 - 2026-09-07
 

@@ -1,0 +1,11 @@
+#!/bin/sh
+# 固定发布包；来源、升级与卸载见 oracle 产品仓 docs/charter-install.md。
+# 全机入口只选 CLI 与默认引擎；状态归机器单槽，不持有账号或凭据。
+oracle_cli="$HOME/.local/share/oracle/releases/0.20.0/node_modules/.bin/oracle"
+if [ ! -x "$oracle_cli" ]; then
+    echo "Oracle 0.20.0 is not installed; see ~/work/personal/oracle/docs/charter-install.md" >&2
+    exit 127
+fi
+export ORACLE_HOME_DIR="${ORACLE_HOME_DIR:-$HOME/.local/state/oracle}"
+export ORACLE_ENGINE="${ORACLE_ENGINE:-browser}"
+exec "$oracle_cli" "$@"
