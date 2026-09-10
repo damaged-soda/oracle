@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Personal fork: manage the Oracle skill through Charter and use the pinned local CLI instead of on-demand npx downloads.
+
 ## 0.20.0 - 2026-09-07
 
 **Highlights:** GPT-6 Astra API and ChatGPT Latest support, explicit Web Search, and safe cleanup after browser recovery.
